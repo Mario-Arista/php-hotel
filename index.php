@@ -64,6 +64,17 @@
         $filteredHotels = $hotels;
     }
 
+    // Filtraggio degli hotel in base al voto
+    if (isset($_GET['voto'])) {
+
+        $votoScelto = $_GET['voto'];
+
+        $filteredHotels = array_filter($filteredHotels, function($hotel) use ($votoScelto) {
+            return $hotel['vote'] >= $votoScelto;
+        });
+    }
+    
+
 ?>
 
 <!DOCTYPE html>
@@ -98,10 +109,10 @@
                         <option value="3">Senza Parcheggio</option>
                     </select>
 
-                    <!-- <div>
-                        <label class="text-white p-2" for="parola">Cerca per voto (es. almeno 2):</label>
+                    <div>
+                        <label class="text-white p-2" for="voto">Cerca per voto (es. almeno 2):</label>
                         <input class="w-100 p-2 border border-0 rounded-3" name="voto" id="voto" type="number" placeholder="2">
-                    </div> -->
+                    </div>
 
                     <input id="invia" class="text-dark bg-warning p-2 w-100 border border-0 rounded-3 mt-3" type="submit" label="INVIA">
                 </form>
@@ -146,6 +157,7 @@
 
      <!-- BOOTSTRAP -->
      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+
 </body>
 
 </html>
